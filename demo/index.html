@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <style>
+    body {
+      background: #fafafa;
+      font-family: Arial, sans-serif;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Modal Demo</h1>
+    <p>Click the button below to open the modal dialog:</p>
+    <button id="openModal">Open Modal</button>
+  </div>
+
+  <div id="modal-container"></div>
+
+  <script type="module">
+    import { html, render } from 'lit';
+    import '../hello-world.js';
+
+    const header = 'Modal Dialog';
+    const modalContainer = document.querySelector('#modal-container');
+    const openModalButton = document.querySelector('#openModal');
+
+    // Function to show the modal
+    function showModal() {
+      render(
+        html`
+          <hello-world
+            .header=${header}
+            @close=${hideModal}>
+            <p>This is a modal dialog with a dark overlay.</p>
+            <p>Click the X button or outside the modal to close it.</p>
+          </hello-world>
+        `,
+        modalContainer
+      );
+    }
+
+    // Function to hide the modal
+    function hideModal() {
+      render(html``, modalContainer);
+    }
+
+    // Add event listener to the open button
+    openModalButton.addEventListener('click', showModal);
+  </script>
+</body>
+</html>
